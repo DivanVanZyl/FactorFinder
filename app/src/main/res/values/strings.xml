@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Factor Finder</string>
+    <string name="StandardNotation">ax<sup>2</sup>+bx+c</string>
+    <string name="aString">"a = "</string>
+    <string name="bString">"b = "</string>
+    <string name="cString">"c = "</string>
+</resources>
