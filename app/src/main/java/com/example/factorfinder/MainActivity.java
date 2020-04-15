@@ -1,7 +1,11 @@
 package com.example.factorfinder;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.Html;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,9 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import static java.lang.Double.parseDouble;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,68 +23,159 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String testString = "test";
+        final EditText aField = findViewById(R.id.editTextA);
+        final EditText bField = findViewById(R.id.editTextB);
+        final EditText cField = findViewById(R.id.editTextC);
 
         final Button button = findViewById(R.id.btn_fact);
         button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             public void onClick(View v) {
+
                 // Code here executes on main thread after user presses button
                 TextView theCorrectAnsTextView = findViewById(R.id.answer);
 
-                final EditText aField = findViewById(R.id.editTextA);
-                final EditText bField = findViewById(R.id.editTextB);
-                final EditText cField = findViewById(R.id.editTextC);
+                rootHtmlFormatter formatter = new rootHtmlFormatter();
+                divisionHelper div = new divisionHelper();
 
-                String aString = aField.getText().toString();
-                String bString = bField.getText().toString();
-                String cString = cField.getText().toString();
+                String firstResult;
+                String secondResult;
+                //double secondRoot = 0, firstRoot = 0;
 
-                int aVal = Integer.parseInt(aString);
-                final int bVal = Integer.parseInt(bString);
-                int cVal = Integer.parseInt(cString);
+                double aVal = parseDouble(aField.getText().toString());
+                final double bVal = parseDouble(bField.getText().toString());
+                double cVal = parseDouble(cField.getText().toString());
 
-                final List<Multiples> aMultiples = new ArrayList<>();
-                final List<Multiples> cMultiples = new ArrayList<>();
+                //quadratic formula
+                double determinant = (bVal*bVal)-(4*aVal*cVal);
+                double sqrt = Math.sqrt(determinant);
 
-                //find all multiples of a
-                for(int cnt = aVal;cnt > 0;cnt--)
+                if(determinant>0){
+                    firstResult = div.fraction((-bVal + sqrt),(2*aVal));
+                    secondResult = div.fraction((-bVal - sqrt),(2*aVal));
+
+                    theCorrectAnsTextView.setText(android.text.Html.fromHtml("<br /> The Roots are: x = " + firstResult + "  or x = " + secondResult + " <br />", Html.FROM_HTML_MODE_COMPACT));
+                    }else if(determinant == 0){
+                    theCorrectAnsTextView.setText("Root is : "+(-bVal + sqrt)/(2*aVal));
+                }else {
+                    theCorrectAnsTextView.setText("determinant is < 0!");
+                }
+            }
+        });
+        //end of button click listener
+
+        //begin text edit listeners
+        aField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                TextView aValText = findViewById(R.id.aValViewHeading);
+
+                if(aField.getText().toString().contains("."))
                 {
-                    if(aVal % cnt == 0)
+                    try {
+                        double a = Double.parseDouble(aField.getText().toString());
+                        aValText.setText(Double.toString(a));
+                    } catch (NumberFormatException ex) {
+                        aValText.setText("(Not valid)");
+                    }
+                } else
+                {
+                    try {
+                        int a = Integer.parseInt(aField.getText().toString());
+                        aValText.setText(Integer.toString(a));
+
+                    } catch (NumberFormatException e)
                     {
-                        aMultiples.add(new Multiples(cnt,(aVal/cnt)));
+                        aValText.setText("(Not valid)");
                     }
                 }
-                //find all multiples of c
-                for(int cnt = cVal;cnt > 0;cnt--)
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        bField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                TextView bValText = findViewById(R.id.bValViewHeading);
+
+                if(bField.getText().toString().contains("."))
                 {
-                    if(cVal % cnt == 0)
+                    try {
+                        double b = Double.parseDouble(bField.getText().toString());
+                        bValText.setText(Double.toString(b));
+                    } catch (NumberFormatException ex) {
+                        bValText.setText("(Not valid)");
+                    }
+                } else
+                {
+                    try {
+                        int b = Integer.parseInt(bField.getText().toString());
+                        bValText.setText(Integer.toString(b));
+
+                    } catch (NumberFormatException e)
                     {
-                        cMultiples.add(new Multiples(cnt,(cVal/cnt)));
+                        bValText.setText("(Not valid)");
                     }
                 }
+            }
 
-                //try combinations of multiples of a and c, to find one that equals the value of b
-                AtomicBoolean successFlag = new AtomicBoolean(false);
-                aMultiples.forEach((a) ->
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        cField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                TextView cValText = findViewById(R.id.cValViewHeading);
+
+                if(cField.getText().toString().contains("."))
                 {
-                    cMultiples.forEach((c) ->
+                    try {
+                        double c = Double.parseDouble(cField.getText().toString());
+                        cValText.setText(Double.toString(c));
+                    } catch (NumberFormatException ex) {
+                        cValText.setText("(Not valid)");
+                    }
+                } else
+                {
+                    try {
+                        int c = Integer.parseInt(cField.getText().toString());
+                        cValText.setText(Integer.toString(c));
+
+                    } catch (NumberFormatException e)
                     {
-                        if((a.first * c.second) + (a.second * c.first) == bVal)
-                        {
-                            //found the multiples
-                            successFlag.set(true);
-                            theCorrectAnsTextView.setText("(" + a.first + "x * " + c.first + ")" + "(" + a.second + "x * " + c.second + ")");
-                        }
-                        //if(aMultiples)
-                    });
-
-                });
-
-                if(successFlag.get() != true)
-                {
-                    theCorrectAnsTextView.setText("no integer possibility");
+                        cValText.setText("(Not valid)");
+                    }
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }

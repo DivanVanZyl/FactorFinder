@@ -4,15 +4,60 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <TextView
+            android:id="@+id/aValViewHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="a"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     <TextView
-        android:id="@+id/StandardNotation"
+        android:id="@+id/StandardNotation1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/StandardNotation"
+        android:text="@string/StandardNotation1"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="18sp"
         android:textStyle="bold" />
+        <TextView
+            android:id="@+id/bValViewHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="b"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/StandardNotation2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/StandardNotation2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/cValViewHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="c"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/StandardNotation3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/StandardNotation3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
+    </LinearLayout>
     <TextView
         android:id="@+id/aValView"
         android:layout_width="wrap_content"
