@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
                 // Code here executes on main thread after user presses button
                 TextView theCorrectAnsTextView = findViewById(R.id.answer);
 
-                rootHtmlFormatter formatter = new rootHtmlFormatter();
                 divisionHelper div = new divisionHelper();
 
                 String firstResult;
@@ -76,25 +75,33 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 TextView aValText = findViewById(R.id.aValViewHeading);
 
-                if(aField.getText().toString().contains("."))
+                if(aField.getText().length() > 0)
                 {
-                    try {
-                        double a = Double.parseDouble(aField.getText().toString());
-                        aValText.setText(Double.toString(a));
-                    } catch (NumberFormatException ex) {
-                        aValText.setText("(Not valid)");
-                    }
-                } else
-                {
-                    try {
-                        int a = Integer.parseInt(aField.getText().toString());
-                        aValText.setText(Integer.toString(a));
-
-                    } catch (NumberFormatException e)
+                    if(aField.getText().toString().contains("."))
                     {
-                        aValText.setText("(Not valid)");
+                        try {
+                            double a = Double.parseDouble(aField.getText().toString());
+                            aValText.setText(Double.toString(a));
+                        } catch (NumberFormatException ex) {
+                            aValText.setText("(Not valid)");
+                        }
+                    } else
+                    {
+                        try {
+                            int a = Integer.parseInt(aField.getText().toString());
+                            aValText.setText(Integer.toString(a));
+
+                        } catch (NumberFormatException e)
+                        {
+                            aValText.setText("(Not valid)");
+                        }
                     }
                 }
+                else
+                {
+                    aValText.setText("a");
+                }
+
             }
 
             @Override
@@ -114,25 +121,33 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 TextView bValText = findViewById(R.id.bValViewHeading);
 
-                if(bField.getText().toString().contains("."))
+                if(bField.getText().length() > 0)
                 {
-                    try {
-                        double b = Double.parseDouble(bField.getText().toString());
-                        bValText.setText(Double.toString(b));
-                    } catch (NumberFormatException ex) {
-                        bValText.setText("(Not valid)");
-                    }
-                } else
-                {
-                    try {
-                        int b = Integer.parseInt(bField.getText().toString());
-                        bValText.setText(Integer.toString(b));
-
-                    } catch (NumberFormatException e)
+                    if(bField.getText().toString().contains("."))
                     {
-                        bValText.setText("(Not valid)");
+                        try {
+                            double b = Double.parseDouble(bField.getText().toString());
+                            bValText.setText(Double.toString(b));
+                        } catch (NumberFormatException ex) {
+                            bValText.setText("(Not valid)");
+                        }
+                    } else
+                    {
+                        try {
+                            int b = Integer.parseInt(bField.getText().toString());
+                            bValText.setText(Integer.toString(b));
+
+                        } catch (NumberFormatException e)
+                        {
+                            bValText.setText("(Not valid)");
+                        }
                     }
                 }
+                else
+                {
+                    bValText.setText("b");
+                }
+
             }
 
             @Override
@@ -152,25 +167,33 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 TextView cValText = findViewById(R.id.cValViewHeading);
 
-                if(cField.getText().toString().contains("."))
+                if(cField.getText().length() > 0)
                 {
-                    try {
-                        double c = Double.parseDouble(cField.getText().toString());
-                        cValText.setText(Double.toString(c));
-                    } catch (NumberFormatException ex) {
-                        cValText.setText("(Not valid)");
-                    }
-                } else
-                {
-                    try {
-                        int c = Integer.parseInt(cField.getText().toString());
-                        cValText.setText(Integer.toString(c));
-
-                    } catch (NumberFormatException e)
+                    if(cField.getText().toString().contains("."))
                     {
-                        cValText.setText("(Not valid)");
+                        try {
+                            double c = Double.parseDouble(cField.getText().toString());
+                            cValText.setText(Double.toString(c));
+                        } catch (NumberFormatException ex) {
+                            cValText.setText("(Not valid)");
+                        }
+                    } else
+                    {
+                        try {
+                            int c = Integer.parseInt(cField.getText().toString());
+                            cValText.setText(Integer.toString(c));
+
+                        } catch (NumberFormatException e)
+                        {
+                            cValText.setText("(Not valid)");
+                        }
                     }
                 }
+                else
+                {
+                    cValText.setText("c");
+                }
+
             }
 
             @Override
