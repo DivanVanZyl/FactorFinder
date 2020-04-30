@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Factor Finder</string>
-    <string name="StandardNotation1">x<sup>2</sup>+</string>
+    <string name="StandardNotation1">x<sup><small>2</small></sup>+</string>
     <string name="StandardNotation2">x+</string>
     <string name="StandardNotation3"> = 0</string>
     <string name="aString">"a = "</string>
